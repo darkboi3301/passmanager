@@ -8,13 +8,13 @@ import random
 import string
 import re
 from password_strength import PasswordStats
-
+import hashlib
 st.set_page_config(page_title="password manager", page_icon=":smiley:", layout="centered", initial_sidebar_state="expanded")
 
 login_status = False
 
 def checkpass(username, password):
-    if username == "admin" and password == "admin":
+    if username == "admin" and password == "admin": #password == hashlib.md5(password.encode()).digest == b'\xda\x06{\x0cz\x0b6\xff\xb2s\x1c\x1b\xd9\xe4\xa1\xbd':
         return True
     else:
         return False
@@ -30,6 +30,7 @@ def GetPassStrength(password):
 
     elif len(password) <6:
         st.warning('password is too short It must be minimum 6 characters')
+
 
     elif len(password) >=6:
         if password.lower()== password or password.upper()==password or password.isalnum()==password:
